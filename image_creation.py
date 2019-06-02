@@ -22,7 +22,7 @@ def delete_images(images_location):
         p = os.path.join(images_location, a[x])
         if os.path.splitext(p)[1] =='.png':
             os.remove(p)
-
+ 
     
 def create_video(path_of_images):
     os.chdir(path_of_images)
