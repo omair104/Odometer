@@ -15,6 +15,7 @@ def create_image(displayed_number, unit, counter, images_location):
     d = ImageDraw.Draw(img)
     d.text((1100,600), display_on_image , fill=(255,255,255,128), font=font)
     image_name = images_location + str(counter) +  ".png"
+    image_path = os.path.join(images_location, image_name)
     img.save(image_name)
     img.close()
     
@@ -34,7 +35,7 @@ def create_video(path_of_images):
     
 
 def main(entered_length=100, entered_unit='m', entered_time=5):
-    images_location = "H:\\eclipse_workspace\\Odometer\\images\\"
+    images_location = "H:\\eclipse_workspace\\Odometer\\images"
     fps=25
 
     length_per_frame= entered_length/(entered_time*25)
