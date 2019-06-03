@@ -1,17 +1,19 @@
 import os
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
+from PIL._imaging import font
 
 
 
 def create_image(displayed_number, unit, counter, images_location):
-    img = Image.new('RGBA', (1280, 720), (255,255,255,0))
-    img_blue = Image.new('RGB', (100, 20), (51, 153, 255))
-    img.paste(img_blue, (1100,650))
+    img = Image.new('RGBA', (1280, 720), (0,0,0,0))
+    img_blue = Image.new('RGB', (150, 30), (51, 153, 255))
+    img.paste(img_blue, (1100,600))
     img_blue.close()
     
+    font = ImageFont.truetype("font.ttf", 24)
     display_on_image=str(displayed_number)+ ' '+ str(unit)
     d = ImageDraw.Draw(img)
-    d.text((1110,655), display_on_image , fill=(255,255,255,128))
+    d.text((1100,600), display_on_image , fill=(255,255,255,128), font=font)
     image_name = images_location + str(counter) +  ".png"
     img.save(image_name)
     img.close()
@@ -26,8 +28,9 @@ def delete_images(images_location):
     
 def create_video(path_of_images):
     os.chdir(path_of_images)
-    os.system("ffmpeg -r 25 -i %01d.png -vcodec mpeg4 -y movie.mp4")
-    delete_images(path_of_images)
+    os.system("ffmpeg -r 25 -i %01d.png -vf scale=1920:1080 -vcodec png -y movie.mov")
+    #-vf scale=1920:1080
+    #delete_images(path_of_images)
     
 
 def main(entered_length=100, entered_unit='m', entered_time=5):
