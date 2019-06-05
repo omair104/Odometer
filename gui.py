@@ -9,6 +9,7 @@ import os
 import sys
 import tkinter
 from tkinter import Toplevel
+#from tkinter import tkFileDialog
 import image_creation
 
 #For third party libraies
@@ -64,6 +65,20 @@ class Application(tkinter.Frame):
         self.time_label=tkinter.Label(self, text='Enter time (in seconds):').grid(row=21, sticky='W')
         self.time_entrybox=tkinter.Entry(self, width=40)
         self.time_entrybox.grid(row=22, sticky='W')
+        
+        #Enter Location
+        self.location_label=tkinter.Label(self, text='Enter Location of Output video file:').grid(row=23, sticky='W')
+        self.location_entrybox=tkinter.Entry(self, width=40)
+        self.location_entrybox.grid(row=24, sticky='W')
+        #self.askbutton= tkinter.Button(self, text='browse', command=self.askdirectory).grid(row=22, column=1)
+        
+        '''
+        def askdirectory(self):
+        #self.directory = tkFileDialog.askdirectory(**self.dir_opt)
+        self.rotateddirectory = tkFileDialog.askdirectory()
+        self.rotatedpath.delete(0,100)
+        self.rotatedpath.insert(0,self.rotateddirectory)
+        '''
 
         #button for converting
         self.convertbutton = tkinter.Button(self, width=15, text='CREATE VIDEO',font=('bold',18), command=self.createVideo)
@@ -74,7 +89,8 @@ class Application(tkinter.Frame):
         entered_length = int(self.length_entrybox.get())
         entered_unit = str(self.units_variable.get())
         entered_time=int(self.time_entrybox.get())
-        image_creation.main(entered_length, entered_unit, entered_time)
+        entered_location=str(self.location_entrybox.get())
+        image_creation.main(entered_length, entered_unit, entered_time, entered_location)
         
 
 
@@ -94,6 +110,7 @@ class Application(tkinter.Frame):
         self.field1=self.length_entrybox.get()
         self.field2=self.units_variable.get()
         self.field3=self.time_entrybox.get()
+        self.field4=self.location_entrybox.get()
 
         if  not self.field1:
             text_message = "Please select length"
@@ -111,6 +128,13 @@ class Application(tkinter.Frame):
 
         if not self.field3:
             text_message = "Please select time"
+            self.display_error(text_message)
+            return   
+        else:
+            pass
+        
+        if not self.field4:
+            text_message = "Please select location"
             self.display_error(text_message)
             return   
         else:

@@ -1,6 +1,6 @@
 import os
 from PIL import Image, ImageDraw, ImageFont
-from PIL._imaging import font
+#from PIL._imaging import font
 
 
 
@@ -14,9 +14,9 @@ def create_image(displayed_number, unit, counter, images_location):
     display_on_image=str(displayed_number)+ ' '+ str(unit)
     d = ImageDraw.Draw(img)
     d.text((1100,600), display_on_image , fill=(255,255,255,128), font=font)
-    image_name = images_location + str(counter) +  ".png"
+    image_name = str(counter) +  ".png"
     image_path = os.path.join(images_location, image_name)
-    img.save(image_name)
+    img.save(image_path)
     img.close()
     
 def delete_images(images_location):
@@ -31,11 +31,13 @@ def create_video(path_of_images):
     os.chdir(path_of_images)
     os.system("ffmpeg -r 25 -i %01d.png -vf scale=1920:1080 -vcodec png -y movie.mov")
     #-vf scale=1920:1080
-    #delete_images(path_of_images)
+    delete_images(path_of_images)
     
 
-def main(entered_length=100, entered_unit='m', entered_time=5):
-    images_location = "H:\\eclipse_workspace\\Odometer\\images"
+def main(entered_length=100, entered_unit='m', entered_time=5, entered_location=''):
+    #images_location = "H:\\eclipse_workspace\\Odometer\\images"
+    images_location = entered_location 
+    #images_location = "C:\\temp\\"
     fps=25
 
     length_per_frame= entered_length/(entered_time*25)
