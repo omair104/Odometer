@@ -93,7 +93,6 @@ class Application(tkinter.Frame):
         image_creation.main(entered_length, entered_unit, entered_time, entered_location)
         
 
-
     def display_error(self, text_message):
         top = Toplevel()
         x = self.master.winfo_rootx()

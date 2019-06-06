@@ -13,7 +13,7 @@ def create_image(displayed_number, unit, counter, images_location):
     font = ImageFont.truetype("font.ttf", 24)
     display_on_image=str(displayed_number)+ ' '+ str(unit)
     d = ImageDraw.Draw(img)
-    d.text((1100,600), display_on_image , fill=(255,255,255,128), font=font)
+    d.text((1100,600), display_on_image , fill=(255,255,255,255), font=font)
     image_name = str(counter) +  ".png"
     image_path = os.path.join(images_location, image_name)
     img.save(image_path)
